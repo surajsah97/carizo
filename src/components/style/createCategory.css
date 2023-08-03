@@ -1,0 +1,139 @@
+/* Example CSS styles for the registration form */
+.outerMainRegisterForm {
+    /* background: red; */
+    width: 83%;
+    margin: auto;
+    padding: .5rem 0rem;
+  }
+  .innerMainRegisterForm {
+    background-color: #1275df;
+    padding: 1rem;
+    width: 40rem;
+    margin: auto;
+    border-radius: 2rem;
+  }
+  
+  .outerRegisterForm {
+    display: flex;
+    background: white;
+    /* background: #0abde3; */
+    flex-direction: column;
+    width: 35rem;
+    /* height: 33rem; */
+    margin: auto;
+    border-radius: 2rem;
+    margin-top: 1rem;
+    /* border: 1px solid red; */
+  }
+  
+  .RegisterFormImage {
+    display: flex;
+    margin: auto;
+    /* border: 1px solid red; */
+    width: 10rem;
+    height: 4rem;
+    /* background-color: white; */
+    
+  }
+  .RegisterFormImage > img {
+    border: 1px solid black;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 1) 0px 4px 10px;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    height: inherit;
+  }
+  
+h2{
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 1) 0px 4px 10px;
+
+}
+
+
+  .RegisterFormForm {
+    /* margin-top: 7rem; */
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 2rem;
+    background-color: white;
+    /* border: 1px solid red; */
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 1) 0px 4px 10px;
+  }
+  
+  
+  .passwordShowHide {
+    display: flex;
+    /* border: 1px solid red; */
+    align-items: center;
+    position: relative;
+  }
+  
+  .passwordHideShow {
+    position: absolute;
+    width: 3rem;
+    height: 2.2rem;
+    /* background-color: aquamarine; */
+    border-radius: 20%;
+    color: red;
+    font-size: 1.5rem;
+    right: 0rem;
+    outline: none;
+    border: none;
+  }
+  
+  
+  .labelRegisterForm {
+    font-size: 1.4rem;
+    color: red;
+  }
+  
+  .inputRegister {
+    /* margin-top: 0.5rem; */
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    /* border: 1px solid red; */
+    font-size: 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid black;
+  }
+  
+  .allButton {
+    /* border: 1px solid blue; */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  
+  .submitSignupForm {
+    background-color: #686de0;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0rem 0.9rem !important;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .loginButton {
+    /* margin-top: 1rem; */
+    /* padding: 1rem 0; */
+    cursor: pointer;
+    border: none;
+    border-radius: 8%;
+    font-size: 1rem;
+    color: blue;
+    /* text-align: center; */
+  }
+  
+  .textTomato {
+    color: tomato;
+    font-size: larger;
+    text-decoration: underline;
+  }
+  
