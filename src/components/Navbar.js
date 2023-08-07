@@ -6,12 +6,28 @@ import logo22 from '../components/carLogo/logo22.jpg'
 const Navbar = () => {
   const [data, setdata] = useState([])
   const baseUrl=process.env.REACT_APP_BaseUrl
+  const [car, setcar] = useState([])
+  const [bike, setbike] = useState([])
+
 
   useEffect(() => {
     axios.get(baseUrl+"/cat-super-catagory").then(res => {
       console.log({ res: res.data }, "-=================");
       if (res.data.status === 1) {
         setdata(res.data.data?res.data.data:[])
+        let datas={}
+        res.data.data.map(el=>{
+          if(datas[el.type]){
+            datas[el.type].append(el)
+          }
+          else{
+            datas[el.type]=[el]
+          }
+        })
+        console.log({datas},"-=-=-=-=-=-");
+        setbike(datas["bike"]?datas["bike"]:[])
+        setcar(datas["car"]?datas["car"]:[])
+
       }
       else if (res.data.status === 2) {
         setdata(res.data.data?res.data.data:[])
@@ -24,6 +40,21 @@ const Navbar = () => {
     })
 
   }, [])
+
+  const handleCart=(e,type)=>{
+    e.preventDefault();
+    axios.get(baseUrl+`/cat-super-catagory?type=${type}`).then(res => {
+      console.log({ res: res.data }, "-=================");
+      if (res.data.status === 1) {
+        setdata(res.data.data?res.data.data:[])
+      }
+      else if (res.data.status === 2) {
+        setdata(res.data.data?res.data.data:[])
+
+      }
+
+  })
+}
 
   return (
     <div>
@@ -2164,17 +2195,17 @@ const Navbar = () => {
                         </Link>
                       </li>
 
-                      <li className="dropdown dropdown-mega-menu">
+                      <li className="dropdown dropdown-mega-menu" >
                         <Link
                           className="dropdown-toggle nav-link"
-                          href="#"
+                          onClick={e=>{handleCart(e,"car")}}
                           data-toggle="dropdown"
                         >
                           Car
                         </Link>
                         <div className="dropdown-menu">
                           <ul className="mega-menu d-lg-flex">
-                            {data.map((el, i) => {
+                            {car.map((el, i) => {
                               return (<li key={el.id} className="mega-menu-col col-lg-3">
                                 <ul>
                                   <li className="dropdown-header">
@@ -2404,16 +2435,36 @@ const Navbar = () => {
                         </div>
                       </li>
 
-                      <li className="dropdown dropdown-mega-menu">
+                      <li className="dropdown dropdown-mega-menu" >
                         <Link
                           className="dropdown-toggle nav-link"
-                          href="#"
+                          onClick={e=>{handleCart(e,"bike")}}
                           data-toggle="dropdown"
                         >
                           Bike
                         </Link>
                         <div className="dropdown-menu">
                           <ul className="mega-menu d-lg-flex">
+                          {bike.length>0?bike.map((el, i) => {
+                              return (<li key={el.id} className="mega-menu-col col-lg-3">
+                                <ul>
+                                  <li className="dropdown-header">
+                                    {el.name}
+                                  </li>
+                                  {el.catagory?.map((ele, i) => {
+                                    return (<li key={i}>
+                                      <Link
+                                        className="dropdown-item nav-link nav_item"
+                                        to={`/product/${ele.id}`}
+                                      >
+
+                                        {ele.name}
+                                      </Link>
+                                    </li>)
+                                  })}
+                                </ul>
+                              </li>)
+                            }):
                             <li className="mega-menu-col col-lg-9">
                               <ul className="d-lg-flex">
                                 <li className="mega-menu-col col-lg-4">
@@ -2558,7 +2609,7 @@ const Navbar = () => {
                                   </ul>
                                 </li>
                               </ul>
-                            </li>
+                            </li>}
                             <li className="mega-menu-col col-lg-3">
                               <div className="header_banner">
                                 <div className="header_banner_content">

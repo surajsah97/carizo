@@ -10,7 +10,15 @@ const CreateSuperCategory = () => {
   const [image, setImage] = useState(null);
   const [count, setCount] = useState("");
   const [desc, setDesc] = useState("");
+  const [type, setype] = useState("");
+
   const baseUrl=process.env.REACT_APP_BaseUrl
+
+const handleType=(e)=>{
+e.preventDefault();
+setype(e.target.value)
+
+}
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -40,7 +48,7 @@ const CreateSuperCategory = () => {
         
         const login_key = localStorage.getItem("login_data");
       
-        const response = await axios.post(baseUrl+'/super-catagory', {name,image,desc,count}, { headers: {'Content-Type': 'multipart/form-data',Authorization: `${login_key}`}});
+        const response = await axios.post(baseUrl+'/super-catagory', {name,image,desc,count,type}, { headers: {'Content-Type': 'multipart/form-data',Authorization: `${login_key}`}});
         
       console.log(response, "...........response");
       console.log(response.data, ".........data");
@@ -86,6 +94,27 @@ const CreateSuperCategory = () => {
                   required
                   autoFocus
                 />
+                
+                <label className="labelRegisterForm" htmlFor="image">
+                  Type:
+                </label>
+
+<select
+                  className="inputRegister"
+                  onChange={handleType}
+                  id="parentid"
+                >
+                  <option value="">Type</option>
+                
+                    <option value="car">
+                      car
+                    </option>
+                    <option value="bike">
+                      bike
+                    </option>
+        
+                </select>
+
 
                 <label className="labelRegisterForm" htmlFor="image">
                   Image:
@@ -112,6 +141,8 @@ const CreateSuperCategory = () => {
                   onChange={handleCountChange}
                 />
 
+                
+
                 <label className="labelRegisterForm" htmlFor="desc">
                   description:
                 </label>
@@ -127,7 +158,7 @@ const CreateSuperCategory = () => {
 
                 <div className="allButton">
                   <button className="submitSignupForm" type="submit">
-                    Register
+                    Add
                   </button>
                 </div>
               </form>

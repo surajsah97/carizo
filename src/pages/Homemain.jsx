@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Card, CardMedia, CardContent, Typography } from '@mui/material';
 import carbodycover from '../assets/images/carbodycover.jpg';
 import blind_spot from '../assets/images/blind_spot.jpg';
@@ -18,6 +18,8 @@ import garboot from '../assets/images/garboot.jpg';
 import gelfreshner from '../assets/images/gelfreshner.jpg';
 import mudflaps from '../assets/images/mudflaps.jpg';
 import wheelcovers from '../assets/images/wheelcovers.jpg';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const texts = [
   'Car Body Cover',
@@ -40,7 +42,21 @@ const texts = [
   'Wheel Covers',
 ];
 
+
+let baseUrl=process.env.REACT_APP_BaseUrl
+
+
 const MainCard = () => {
+  const [catgory, SetCatgory] = useState([])
+  useEffect(() => {
+   axios.get(baseUrl+"/catagory").then(val=>{
+if(val.data.status==1){
+    SetCatgory(val.data.data)
+}
+   }).catch(err=>{
+    
+   })
+  }, [])
   const cardStyle = {
     maxWidth: 1550,
     marginLeft: '20px',
@@ -55,17 +71,21 @@ const MainCard = () => {
         <Grid container spacing={2}>
           {/* First Row */}
           <Grid container item xs={12} spacing={2}>
-            {renderImageWithText(1, carbodycover, texts[0])}
+            {catgory.map((el,i)=>{
+            return <><Link key={i} to={`/product/${el.id}`}>{renderImageWithText(i, el.image, el.name)}</Link> </>
+
+            })}
+            {/* {renderImageWithText(1, carbodycover, texts[0])}
             {renderImageWithText(2, blind_spot, texts[1])}
             {renderImageWithText(3, car_sunshade, texts[2])}
             {renderImageWithText(4, bumperprotectors, texts[3])}
             {renderImageWithText(5, cararmset, texts[4])}
-            {renderImageWithText(6, caraudiosystem, texts[5])}
+            {renderImageWithText(6, caraudiosystem, texts[5])} */}
           {/* </Grid> */}
 
           {/* Second Row */}
           {/* <Grid container item xs={12} spacing={2}> */}
-            {renderImageWithText(7, cardoor, texts[6])}
+            {/* {renderImageWithText(7, cardoor, texts[6])}
             {renderImageWithText(8, carhorns, texts[7])}
             {renderImageWithText(9, carseat, texts[8])}
             {renderImageWithText(10, carsteeringknobs, texts[9])}
@@ -76,7 +96,7 @@ const MainCard = () => {
             {renderImageWithText(15, garboot, texts[14])}
             {renderImageWithText(16, gelfreshner, texts[15])}
             {renderImageWithText(17, mudflaps, texts[16])}
-            {renderImageWithText(18, wheelcovers, texts[17])}
+            {renderImageWithText(18, wheelcovers, texts[17])} */}
           </Grid>
         </Grid>
       </CardContent>

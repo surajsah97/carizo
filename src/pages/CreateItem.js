@@ -291,7 +291,7 @@ const handleSubCategoryChange=(e)=>{
 
                 <div className="allButton">
                   <button className="submitSignupForm" type="submit">
-                    Register
+                    Add
                   </button>
                 </div>
               </form>
