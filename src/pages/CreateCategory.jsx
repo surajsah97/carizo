@@ -13,6 +13,7 @@ const CreateCategory = () => {
   const [desc, setDesc] = useState("");
   const [parentId, setParentId] = useState("");
   const [price, setPrice] = useState(0);
+  const [pouse, setpouse] = useState(false)
   const baseUrl=process.env.REACT_APP_BaseUrl
   useEffect(() => {
     axios.get(baseUrl+"/super-catagory").then((value) => {
@@ -47,6 +48,7 @@ const CreateCategory = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setpouse(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -75,6 +77,7 @@ const CreateCategory = () => {
       console.log(response.data.status, ".......status");
       console.log(response.data.message, ".......message");
       if (response.status === 200) {
+        setpouse(false)
         toast.dark("Product Add successFull");
         setName("");
         setImage("");
@@ -185,8 +188,8 @@ const CreateCategory = () => {
                 />
 
                 <div className="allButton">
-                  <button className="submitSignupForm" type="submit">
-                    Register
+                  <button className="submitSignupForm" type="submit" disabled={pouse}>
+                    Add
                   </button>
                 </div>
               </form>

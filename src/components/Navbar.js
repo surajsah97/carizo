@@ -10,19 +10,24 @@ const Navbar = () => {
   const [bike, setbike] = useState([])
 
 
+
   useEffect(() => {
     axios.get(baseUrl+"/cat-super-catagory").then(res => {
-      console.log({ res: res.data }, "-=================");
+      console.log({ res: res.data,tt:res.data.status }, "-=================");
       if (res.data.status === 1) {
         setdata(res.data.data?res.data.data:[])
         let datas={}
         res.data.data.map(el=>{
+          if(el.type){
+            console.log({el});
           if(datas[el.type]){
-            datas[el.type].append(el)
+            datas[el.type].push(el)
           }
           else{
+            
             datas[el.type]=[el]
           }
+        }
         })
         console.log({datas},"-=-=-=-=-=-");
         setbike(datas["bike"]?datas["bike"]:[])
@@ -35,6 +40,7 @@ const Navbar = () => {
       }
       // setdata([])
     }).catch(err => {
+      console.log({err});
       setdata([])
 
     })

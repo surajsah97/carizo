@@ -61,7 +61,7 @@
 // };
 
 // export default Newarrival;
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -74,6 +74,7 @@ import doorguard from '../assets/images/doorguard.jpg';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
 
 const productData = [
   {
@@ -115,6 +116,19 @@ const productData = [
 ];
 
 const ProductSlider = () => {
+  const [data, setdata] = useState([])
+  const baseUrl=process.env.REACT_APP_BaseUrl
+  useEffect(()=>{
+    axios.get(baseUrl+"/item").then(res=>{
+      if(res.data.status==1){
+        
+        setdata(res.data.data)
+      }
+    })
+    .catch(err=>{
+      console.log({err});
+    })
+      },[])
   const settings = {
     dots: true,
     infinite: true,
@@ -147,7 +161,7 @@ const ProductSlider = () => {
         </Button>
       </div>
       <Slider {...settings}>
-        {productData.map((product, index) => (
+        {data.map((product, index) => (
           <div key={index} style={{ padding: '0 8px' }}>
             <div style={{ position: 'relative', textAlign: 'left' }}>
               <img
